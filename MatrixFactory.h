@@ -14,7 +14,6 @@ public:
     MatrixFactory();
     virtual ~MatrixFactory();
 
-    MatrixTemplate<T>* selectMatrixType(int r, int c);
 
 protected:
     virtual MatrixTemplate<T>* createMatrix(int r, int c) throw(std::out_of_range) = 0;
@@ -27,12 +26,6 @@ MatrixFactory<T>::MatrixFactory() {
 template <class T>
 MatrixFactory<T>::~MatrixFactory() {
 
-}
-template <class T>
-MatrixTemplate<T>* MatrixFactory<T>::selectMatrixType(int r, int c) {
-    MatrixTemplate<T>* matrix;
-    matrix = createMatrix(r,c);
-    return matrix;
 }
 
 
