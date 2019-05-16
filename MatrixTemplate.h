@@ -145,7 +145,7 @@ MatrixTemplate<T> MatrixTemplate<T>::selectColumn(int colNum) const throw(std::o
 
     MatrixTemplate<T> columnMatrix(_rows, 1);
     for(int j = 0; j<_rows; j++)
-        columnMatrix._buffer[j] = _buffer[j*_rows];
+        columnMatrix._buffer[j] = _buffer[j*_rows + 1];
     return columnMatrix;
 }
 template <class T>

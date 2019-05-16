@@ -7,7 +7,7 @@ int intMatrix();
 void floatMatrix();
 
 int main(int argc, char **argv){
-    MatrixFactory<int>* matrixFactory = new MatrixFactoryType<int>();
+    MatrixFactoryType<int>* matrixfactorytype = new MatrixFactoryType<int>();
     int rows = 0,columns = 0;
     int value = 0;
     int posCol = 0, posRow = 0, newValue = 0;
@@ -17,7 +17,7 @@ int main(int argc, char **argv){
         std::cout << "\nEnter matrix rows: ";std::cin >> rows;
         std::cout << "Enter matrix columns: "; std::cin >> columns;
     }while(rows <= 0 || columns <=0);
-    MatrixTemplate<int>* newMatrix = new MatrixTemplate<int>(rows, columns);
+    MatrixTemplate<int>* newMatrix = matrixfactorytype->createMatrix(rows,columns);
     newMatrix->manualInsertValues();
     newMatrix->printMatrix();
     int numero = 0;
@@ -51,15 +51,15 @@ int main(int argc, char **argv){
 
             std::cout << "\nMULTIPLYING TWO MATRIX" << std::endl;
             std::cout << "======================" << std::endl;
-            MatrixTemplate<int> *secondMatrix = new MatrixTemplate<int>(3, 3);
-            MatrixTemplate<int> *firstMatrix = new MatrixTemplate<int>(3, 3);
+            MatrixTemplate<int> *secondMatrix = matrixfactorytype->createMatrix(3,3);
+            MatrixTemplate<int> *firstMatrix = matrixfactorytype->createMatrix(3,3);
             firstMatrix->randomMatrix();
             secondMatrix->randomMatrix();
             firstMatrix->setMatrixName("First matrix");
             secondMatrix->setMatrixName("Second matrix");
             firstMatrix->printMatrix();
             secondMatrix->printMatrix();
-            MatrixTemplate<int> *prodMatrix = new MatrixTemplate<int>(3, 3);
+            MatrixTemplate<int> *prodMatrix = matrixfactorytype->createMatrix(3,3);
             *prodMatrix = (*firstMatrix) * (*secondMatrix);
             prodMatrix->printMatrix("Product matrix");
             std::cout<<"se vuoi effetuare un'altra operazione premi si"; std::cin >>comp;
@@ -98,13 +98,13 @@ int main(int argc, char **argv){
             std::cout << "Select row of matrix: ";
             std::cin >> selRow;
 
-            *newMatrix = (*newMatrix).selectRow(selRow);
-            newMatrix->printMatrix("Row Matrix");
+            MatrixTemplate<int> *rowMatrix = matrixfactorytype->createMatrix(columns,rows);
+            *rowMatrix = (*newMatrix).selectRow(selRow);
+            rowMatrix->printMatrix();
 
-            MatrixTemplate<int> *columnMatrix = matrixFactory->selectMatrixType(1, 1);
+            MatrixTemplate<int> *columnMatrix = matrixfactorytype->createMatrix(columns,rows);
             *columnMatrix = (*newMatrix).selectColumn(selCol);
-            columnMatrix->setMatrixName("COLUMN");
-            columnMatrix->printMatrix("Columns Matrix");
+            columnMatrix->printMatrix();
         }
         std::cout<<"se vuoi effetuare un'altra operazione premi si"; std::cin >>comp;
         if (avanti.compare(comp)==0)
